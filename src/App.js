@@ -1,6 +1,7 @@
-import logo from './logo.svg';
-import './App.css';
-import Navbar from './components/common/Navbar';
+import logo from "./logo.svg";
+import "./App.css";
+import Navbar from "./components/common/Navbar";
+import Footer from "./components/common/Footer";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           Learn React
         </a>
       </header>
+      <Footer />
     </div>
   );
 }
