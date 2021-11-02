@@ -49,8 +49,9 @@ export default function Footer() {
   return (
     <Box
       bg={useColorModeValue("white", "gray.900")}
-      color={useColorModeValue("black", "gray.200")}
+      color={useColorModeValue("gray.500", "gray.200")}
       fontSize="sm"
+      borderWidth="thin"
     >
       <Container as={Stack} maxW={"7xl"} py={10}>
         <SimpleGrid
@@ -74,7 +75,7 @@ export default function Footer() {
               </SocialButton>
             </Stack>
           </Stack>
-          <Stack align={"flex-start"}>
+          <Stack align={"flex-start"} >
             <ListHeader>Why JulioStays</ListHeader>
             <Link href={"#"}>Find your home</Link>
             <Link href={"#"}>List your space</Link>

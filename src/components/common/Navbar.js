@@ -31,6 +31,11 @@ const Navbar = () => {
         px={{ base: 4 }}
         borderColor={useColorModeValue("gray.200", "gray.900")}
         align={"center"}
+        position="fixed"
+        top="0"
+        left="0"
+        right="0"
+        zIndex="100"
       >
         <Logo size="50px" />
         <Flex
