@@ -5,7 +5,6 @@ import {
   Stack,
   Flex,
   InputGroup,
-  Text,
 } from "@chakra-ui/react";
 
 // components

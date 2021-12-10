@@ -20,9 +20,9 @@ function Listing() {
     return fns((s) => ({ ...s, step: cst.step + 1 }));
   };
 
-  const handleChange = (e) => {
-    return fns((s) => ({ ...s, [e.target.name]: e.target.value }));
-  };
+  // const handleChange = (e) => {
+  //   return fns((s) => ({ ...s, [e.target.name]: e.target.value }));
+  // };
 
   return (
     <DashboardWrapper>

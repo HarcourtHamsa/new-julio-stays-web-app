@@ -27,21 +27,21 @@ const Navbar = () => {
   const { onToggle } = useDisclosure();
   const [currentUser, setCurrentUser] = React.useState(null);
 
-  const getCurrentUser = async () => {
-    await auth.onAuthStateChanged((user) => {
-      if (user) {
-        return user;
-      } else {
-        return null;
-      }
-    });
-  };
+  // const getCurrentUser = async () => {
+  //   await auth.onAuthStateChanged((user) => {
+  //     if (user) {
+  //       return user;
+  //     } else {
+  //       return null;
+  //     }
+  //   });
+  // };
 
   React.useEffect(() => {
     console.log("AUTH.CURRENT USER", auth.currentUser);
     setCurrentUser(auth.currentUser);
     console.log("CURRENT USER", currentUser);
-  }, []);
+  }, [currentUser]);
 
   return (
     <Box>
