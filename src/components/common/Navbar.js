@@ -8,28 +8,49 @@ import {
   Stack,
   Popover,
   PopoverTrigger,
-  Link,
   Button,
   Menu,
   MenuButton,
   MenuList,
   MenuItem,
 } from "@chakra-ui/react";
-import Logo from "./Logo";
-import { HamburgerIcon } from "@chakra-ui/icons";
 
+// firebase
+import { auth } from "../../firebaseClient";
+
+// custom component
+import Logo from "./Logo";
+import HamburgerIcon from "./HamburgerIcon";
+import CustomLink from "./Link";
+import Avatar from "./Avatar";
 const Navbar = () => {
   const { onToggle } = useDisclosure();
+  const [currentUser, setCurrentUser] = React.useState(null);
+
+  const getCurrentUser = async () => {
+    await auth.onAuthStateChanged((user) => {
+      if (user) {
+        return user;
+      } else {
+        return null;
+      }
+    });
+  };
+
+  React.useEffect(() => {
+    console.log("AUTH.CURRENT USER", auth.currentUser);
+    setCurrentUser(auth.currentUser);
+    console.log("CURRENT USER", currentUser);
+  }, []);
+
   return (
     <Box>
       <Flex
-        borderBottomWidth="thin"
         bg={useColorModeValue("white", "gray.800")}
         color={useColorModeValue("white", "white")}
         minH={"60px"}
-        py={{ base: 2 }}
-        px={{ base: 4 }}
-        borderColor={useColorModeValue("gray.200", "gray.900")}
+        w="full"
+        pr={{ base: 4 }}
         align={"center"}
         position="fixed"
         top="0"
@@ -37,38 +58,93 @@ const Navbar = () => {
         right="0"
         zIndex="100"
       >
-        <Logo size="50px" />
-        <Flex
-          flex={{ base: 1, md: "auto" }}
-          ml={{ base: -2 }}
-          display={{ base: "flex", md: "none" }}
-          justify="end"
-        >
-          <Menu>
-            <MenuButton transition="all 0.2s">
-              <IconButton
-                onClick={onToggle}
-                icon={<HamburgerIcon w={8} h={8} color="black" />}
-                variant={"ghost"}
-                aria-label={"Toggle Navigation"}
-              />
-            </MenuButton>
-            <MenuList color="black" rounded="0" fontSize="sm">
-              {NAV_ITEMS.map((item) => {
-                return <MenuItem>{item.label}</MenuItem>;
-              })}
+        <Flex maxW={"6xl"} w="inherit" m="auto">
+          <Logo />
+          <Flex
+            flex={{ base: 1, md: "auto" }}
+            ml={{ base: -2 }}
+            display={{ base: "flex", md: "none" }}
+            justify="end"
+          >
+            <Menu>
+              <MenuButton transition="all 0.2s">
+                <IconButton
+                  onClick={onToggle}
+                  icon={<HamburgerIcon w={8} h={8} color="black" />}
+                  variant={"ghost"}
+                  aria-label={"Toggle Navigation"}
+                />
+              </MenuButton>
+              <MenuList color="black" rounded="0" fontSize="sm">
+                {NAV_ITEMS.map((item, index) => {
+                  return (
+                    <MenuItem key={index}>
+                      <CustomLink to={item.href} label={item.label} />
+                    </MenuItem>
+                  );
+                })}
 
-              <MenuItem>Get Started</MenuItem>
-            </MenuList>
-          </Menu>
-        </Flex>
-        <Flex
-          flex={{ base: 1 }}
-          justify={{ base: "center", md: "end" }}
-          display={{ base: "none", md: "flex" }}
-        >
-          <Flex ml={10} align="center">
-            <DesktopNav />
+                {currentUser ? (
+                  <>
+                    <MenuItem>
+                      <CustomLink to="/app" label="Dashboard" />
+                    </MenuItem>
+                    <MenuItem onClick={auth.signOut()}>
+                      <CustomLink to="/" label="Logout" />
+                    </MenuItem>
+                  </>
+                ) : (
+                  <>
+                    <MenuItem>
+                      <CustomLink to="/login" label="Login" />
+                    </MenuItem>
+                    <MenuItem>
+                      <CustomLink to="/signup" label="Get Started" />
+                    </MenuItem>
+                  </>
+                )}
+              </MenuList>
+            </Menu>
+          </Flex>
+          <Flex
+            flex={{ base: 1 }}
+            justify={{ base: "center", md: "end" }}
+            display={{ base: "none", md: "flex" }}
+          >
+            <Flex ml={10} align="center">
+              <Stack direction={"row"} spacing={4} alignItems="center">
+                {NAV_ITEMS.map((navItem) => (
+                  <Box key={navItem.label}>
+                    <Popover trigger={"hover"} placement={"bottom-start"}>
+                      <PopoverTrigger>
+                        <CustomLink to={navItem.href} label={navItem.label} />
+                      </PopoverTrigger>
+                    </Popover>
+                  </Box>
+                ))}
+                {currentUser ? (
+                  <Avatar />
+                ) : (
+                  <>
+                    <CustomLink to={"/login"} label={"Login"} />
+                    <Button
+                      fontWeight={400}
+                      bg="black"
+                      rounded="full"
+                      size="md"
+                      color={"white"}
+                      fontSize="sm"
+                    >
+                      <CustomLink
+                        to="/signup"
+                        label="Get started"
+                        color="white"
+                      />
+                    </Button>
+                  </>
+                )}
+              </Stack>
+            </Flex>
           </Flex>
         </Flex>
       </Flex>
@@ -76,59 +152,45 @@ const Navbar = () => {
   );
 };
 
-const DesktopNav = () => {
-  const linkHoverColor = useColorModeValue("gray.800", "white");
-  return (
-    <Stack direction={"row"} spacing={4}>
-      {NAV_ITEMS.map((navItem) => (
-        <Box key={navItem.label}>
-          <Popover trigger={"hover"} placement={"bottom-start"}>
-            <PopoverTrigger>
-              <Link
-                p={2}
-                href={navItem.href ?? "#"}
-                fontWeight={400}
-                fontSize="sm"
-                color={"black"}
-                _hover={{
-                  textDecoration: "none",
-                  color: linkHoverColor,
-                }}
-              >
-                {navItem.label}
-              </Link>
-            </PopoverTrigger>
-          </Popover>
-        </Box>
-      ))}
-      <Button
-        fontWeight={400}
-        bg="transparent"
-        rounded="0"
-        size="sm"
-        color={"black"}
-        fontSize="xs"
-        borderWidth="thin"
-        borderColor="black"
-      >
-        Get started
-      </Button>
-    </Stack>
-  );
-};
+// const DesktopNav = (props) => {
+//   console.log("PROPS", props);
+//   return (
+//     <Stack direction={"row"} spacing={4} alignItems="center">
+//       {NAV_ITEMS.map((navItem) => (
+//         <Box key={navItem.label}>
+//           <Popover trigger={"hover"} placement={"bottom-start"}>
+//             <PopoverTrigger>
+//               <CustomLink to={navItem.href} label={navItem.label} />
+//             </PopoverTrigger>
+//           </Popover>
+//         </Box>
+//       ))}
+//       {props?.user && <Avatar />}
+//       <>
+//         <CustomLink {...props} to={"/login"} label={"Login"} />
+//         <Button
+//           fontWeight={400}
+//           bg="black"
+//           rounded="full"
+//           size="md"
+//           color={"white"}
+//           fontSize="sm"
+//         >
+//           <CustomLink to="/signup" label="Get started" color="white" />
+//         </Button>
+//       </>
+//     </Stack>
+//   );
+// };
 
 const NAV_ITEMS = [
   {
     label: "Browse homes",
-    href: "/",
+    href: "/apartments",
   },
   {
     label: "List your space",
-    href: "#",
-  },
-  {
-    label: "Login",
-    href: "#",
+    href: "/host",
   },
 ];
 

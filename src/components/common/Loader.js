@@ -9,7 +9,7 @@ const Loader = () => {
           thickness="5px"
           speed="0.85s"
           emptyColor="gray.200"
-          color="gray.400"
+          color="black"
           size="xl"
         />
       </div>

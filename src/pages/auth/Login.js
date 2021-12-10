@@ -1,33 +1,47 @@
 import React from "react";
+import { auth } from "../../firebaseClient";
 import { Box, Text, Stack } from "@chakra-ui/react";
 import FormInput from "../../components/common/FormInput";
 import SubmitButton from "../../components/common/SubmitButton";
 import FormWrapper from "../../components/common/FormWrapper";
+import NotificationBar from "../../components/common/NotificationBar";
+import { Redirect } from "react-router";
 
 function Login() {
+  const [errorMsg, setErrorMsg] = React.useState(null);
+  const [isSuccessful, setIsSuccessful] = React.useState(null);
   const [cst, fns] = React.useState({
     email: "",
     password: "",
+    loading: false,
   });
 
   const handleChange = (e) => {
     fns((prevState) => ({ ...prevState, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(cst);
+    fns((s) => ({ ...s, loading: true }));
+
+    auth
+      .signInWithEmailAndPassword(cst.email, cst.password)
+      .then((data) => console.log("LOGIN SUCCESSFUL", data))
+      .then(() => setIsSuccessful(true))
+      .catch((err) => setErrorMsg("Invalid email or password"));
+
+    fns((s) => ({ email: "", password: "", loading: "" }));
   };
+
+  if (isSuccessful) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <FormWrapper>
       <Box textAlign="justify">
-        <Text fontSize="3xl" as="h1">
-          Log In
-        </Text>
-        <Text fontSize="sm" color="gray.400">
-          Access to your dashboard
-        </Text>
+        <Text fontSize={{ base: "3xl", md: "5xl" }}>Login</Text>
+        <Text fontSize="sm">Access to your dashboard</Text>
 
         <form onSubmit={handleSubmit}>
           <Stack spacing={4} mt="10">
@@ -48,13 +62,11 @@ function Login() {
               onChange={handleChange}
             />
 
-            <SubmitButton label="Continue" />
-            <Text fontSize="sm" textAlign="right" color="gray.400">
-              Fogort password?
-            </Text>
+            <SubmitButton label="Log in" />
           </Stack>
         </form>
       </Box>
+      {errorMsg && <NotificationBar msg={errorMsg} />}
     </FormWrapper>
   );
 }

@@ -2,14 +2,17 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Button } from "@chakra-ui/react";
 
-function SubmitButton({ label }) {
+function SubmitButton({ label, rest }) {
   return (
     <Button
       type="submit"
       fontSize="sm"
       fontWeight="400"
-      color="gray.500"
-      rounded="sm"
+      color="white"
+      rounded="0"
+      bg='black'
+      size="lg"
+      {...rest}
     >
       {label}
     </Button>

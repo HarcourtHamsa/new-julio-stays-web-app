@@ -1,10 +1,19 @@
 import React from "react";
-import { Box, Text, Stack } from "@chakra-ui/react";
+import { Box, Text, Stack, Flex } from "@chakra-ui/react";
+
+// firebase
+import { auth, firestore } from "../../firebaseClient";
+
+// components
 import FormInput from "../../components/common/FormInput";
 import SubmitButton from "../../components/common/SubmitButton";
 import FormWrapper from "../../components/common/FormWrapper";
+import NotificationBar from "../../components/common/NotificationBar";
+import { Redirect } from "react-router";
 
 function Signup() {
+  const [errorMsg, setErrorMsg] = React.useState(null);
+  const [isSuccessful, setIsSuccessful] = React.useState(null);
   const [cst, fns] = React.useState({
     email: "",
     password: "",
@@ -16,39 +25,65 @@ function Signup() {
     fns((prevState) => ({ ...prevState, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(cst);
+  const addUserToDB = async (dataObj) => {
+    firestore
+      .collection("users")
+      .add({
+        firstName: dataObj.firstName,
+        lastName: dataObj.lastName,
+        email: dataObj.email,
+        isAdmin: false,
+      })
+      .then(() => {
+        console.log("Document successfully written!");
+      })
+      .catch((error) => {
+        console.error("Error writing document: ", error);
+      });
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    auth
+      .createUserWithEmailAndPassword(cst.email, cst.password)
+      .then(() => {
+        addUserToDB(cst);
+        setIsSuccessful(true);
+      })
+      .catch((err) => setErrorMsg(err.message));
+  };
+
+  if (isSuccessful) {
+    return <Redirect to="/login" />;
+  }
 
   return (
     <FormWrapper>
       <Box textAlign="justify">
-        <Text fontSize="3xl" as="h1">
-          Create Your Account
-        </Text>
-        <Text fontSize="sm" color="gray.400">
-          One step closer to finding your next home.
-        </Text>
+        <Text fontSize={{ base: "3xl", md: "5xl" }}>Sign Up</Text>
+        <Text fontSize="sm">One step closer to finding your next home.</Text>
 
         <form onSubmit={handleSubmit}>
           <Stack spacing={4} mt="10">
-            <FormInput
-              id="first-name"
-              type="text"
-              name="firstName"
-              placeholder="First Name"
-              value={cst.firstName}
-              onChange={handleChange}
-            />
-            <FormInput
-              id="last-name"
-              type="text"
-              name="lastName"
-              placeholder="Last Name"
-              value={cst.lastName}
-              onChange={handleChange}
-            />
+            <Flex gridGap="5">
+              <FormInput
+                id="first-name"
+                type="text"
+                name="firstName"
+                placeholder="First Name"
+                value={cst.firstName}
+                onChange={handleChange}
+              />
+              <FormInput
+                id="last-name"
+                type="text"
+                name="lastName"
+                placeholder="Last Name"
+                value={cst.lastName}
+                onChange={handleChange}
+              />
+            </Flex>
             <FormInput
               id="email"
               type="email"
@@ -67,12 +102,10 @@ function Signup() {
             />
 
             <SubmitButton label="Create My Account" />
-            <Text fontSize="sm" textAlign="right" color="gray.400">
-              Have an account? Sign in
-            </Text>
           </Stack>
         </form>
       </Box>
+      {errorMsg && <NotificationBar msg={errorMsg} />}
     </FormWrapper>
   );
 }

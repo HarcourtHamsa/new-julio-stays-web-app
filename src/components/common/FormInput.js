@@ -2,7 +2,16 @@ import React from "react";
 import PropTypes from "prop-types";
 import { FormControl, Input } from "@chakra-ui/react";
 
-function FormInput({ id, type, name, placeholder, value, onChange }) {
+function FormInput({
+  id,
+  type,
+  name,
+  placeholder,
+  value,
+  onChange,
+  variant,
+  ...rest
+}) {
   return (
     <FormControl id={id}>
       <Input
@@ -11,11 +20,12 @@ function FormInput({ id, type, name, placeholder, value, onChange }) {
         value={value}
         name={name}
         onChange={onChange}
-        variant="outline"
+        variant={variant ?? "filled"}
         size="md"
         fontSize="sm"
         borderRadius="sm"
         required
+        {...rest}
       />
     </FormControl>
   );

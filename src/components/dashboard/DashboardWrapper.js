@@ -72,7 +72,8 @@ const SidebarContent = ({ onClose, ...rest }) => {
   return (
     <Box
       transition="3s ease"
-      bg={useColorModeValue("white", "gray.900")}
+      bg={useColorModeValue("black", "gray.900")}
+      color="white"
       borderRight="1px"
       borderRightColor={useColorModeValue("gray.200", "gray.700")}
       w={{ base: "full", md: 60 }}
@@ -82,7 +83,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
       fontSize="sm"
     >
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
-        <Text fontSize="2xl" as="h1">
+        <Text fontSize="2xl">
           Logo
         </Text>
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
@@ -107,7 +108,7 @@ const NavItem = ({ icon, children, ...rest }) => {
         role="group"
         cursor="pointer"
         _hover={{
-          bg: "gray.300",
+          bg: "black",
           color: "white",
         }}
         {...rest}
