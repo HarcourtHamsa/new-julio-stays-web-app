@@ -8,21 +8,21 @@ import {
   Stack,
   Popover,
   PopoverTrigger,
-  Button,
+  Image,
   Menu,
   MenuButton,
   MenuList,
   MenuItem,
+  Button,
 } from "@chakra-ui/react";
 
 // firebase
 import { auth } from "../../firebaseClient";
 
 // custom component
-import Logo from "./Logo";
 import HamburgerIcon from "./HamburgerIcon";
+import ReactLogo from "../../logo.svg";
 import CustomLink from "./Link";
-import Avatar from "./Avatar";
 const Navbar = () => {
   const { onToggle } = useDisclosure();
   const [currentUser, setCurrentUser] = React.useState(null);
@@ -46,8 +46,8 @@ const Navbar = () => {
   return (
     <Box>
       <Flex
-        bg={useColorModeValue("white", "gray.800")}
-        color={useColorModeValue("white", "white")}
+        bg={useColorModeValue("#f1f1f1", "gray.800")}
+        color={useColorModeValue("black", "white")}
         minH={"60px"}
         w="full"
         pr={{ base: 4 }}
@@ -56,10 +56,13 @@ const Navbar = () => {
         top="0"
         left="0"
         right="0"
-        zIndex="100"
+        zIndex="popover"
+        borderBottomWidth={"thin"}
+        borderColor={"black"}
+        // shadow="md"
       >
-        <Flex maxW={"6xl"} w="inherit" m="auto">
-          <Logo />
+        <Flex maxW={"8xl"} w="inherit" m="auto">
+          <Image src={ReactLogo} w="20" h="10" />
           <Flex
             flex={{ base: 1, md: "auto" }}
             ml={{ base: -2 }}
@@ -79,30 +82,18 @@ const Navbar = () => {
                 {NAV_ITEMS.map((item, index) => {
                   return (
                     <MenuItem key={index}>
-                      <CustomLink to={item.href} label={item.label} />
+                      <CustomLink
+                        to={item.href}
+                        label={item.label}
+                        color="black"
+                      />
                     </MenuItem>
                   );
                 })}
 
-                {currentUser ? (
-                  <>
-                    <MenuItem>
-                      <CustomLink to="/app" label="Dashboard" />
-                    </MenuItem>
-                    <MenuItem onClick={auth.signOut()}>
-                      <CustomLink to="/" label="Logout" />
-                    </MenuItem>
-                  </>
-                ) : (
-                  <>
-                    <MenuItem>
-                      <CustomLink to="/login" label="Login" />
-                    </MenuItem>
-                    <MenuItem>
-                      <CustomLink to="/signup" label="Get Started" />
-                    </MenuItem>
-                  </>
-                )}
+                <MenuItem>
+                  <CustomLink to="/login" label="Get Started" color="black" />
+                </MenuItem>
               </MenuList>
             </Menu>
           </Flex>
@@ -117,32 +108,20 @@ const Navbar = () => {
                   <Box key={navItem.label}>
                     <Popover trigger={"hover"} placement={"bottom-start"}>
                       <PopoverTrigger>
-                        <CustomLink to={navItem.href} label={navItem.label} />
+                        <CustomLink
+                          to={navItem.href}
+                          label={navItem.label}
+                          color="black"
+                        />
                       </PopoverTrigger>
                     </Popover>
                   </Box>
                 ))}
-                {currentUser ? (
-                  <Avatar />
-                ) : (
-                  <>
-                    <CustomLink to={"/login"} label={"Login"} />
-                    <Button
-                      fontWeight={400}
-                      bg="black"
-                      rounded="full"
-                      size="md"
-                      color={"white"}
-                      fontSize="sm"
-                    >
-                      <CustomLink
-                        to="/signup"
-                        label="Get started"
-                        color="white"
-                      />
-                    </Button>
-                  </>
-                )}
+
+                <CustomLink to="/signup" label="Sign up" color="black" />
+                <Button fontWeight={"normal"} bg="teal.500">
+                  <CustomLink to={"login"} label={"Login"} color="white" />
+                </Button>
               </Stack>
             </Flex>
           </Flex>
@@ -152,38 +131,11 @@ const Navbar = () => {
   );
 };
 
-// const DesktopNav = (props) => {
-//   console.log("PROPS", props);
-//   return (
-//     <Stack direction={"row"} spacing={4} alignItems="center">
-//       {NAV_ITEMS.map((navItem) => (
-//         <Box key={navItem.label}>
-//           <Popover trigger={"hover"} placement={"bottom-start"}>
-//             <PopoverTrigger>
-//               <CustomLink to={navItem.href} label={navItem.label} />
-//             </PopoverTrigger>
-//           </Popover>
-//         </Box>
-//       ))}
-//       {props?.user && <Avatar />}
-//       <>
-//         <CustomLink {...props} to={"/login"} label={"Login"} />
-//         <Button
-//           fontWeight={400}
-//           bg="black"
-//           rounded="full"
-//           size="md"
-//           color={"white"}
-//           fontSize="sm"
-//         >
-//           <CustomLink to="/signup" label="Get started" color="white" />
-//         </Button>
-//       </>
-//     </Stack>
-//   );
-// };
-
 const NAV_ITEMS = [
+  {
+    label: "Home",
+    href: "/",
+  },
   {
     label: "Browse homes",
     href: "/apartments",

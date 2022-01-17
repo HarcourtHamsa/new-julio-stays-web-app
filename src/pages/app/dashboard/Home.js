@@ -1,11 +1,45 @@
 import React from "react";
 import { Text, SimpleGrid, Box, Flex } from "@chakra-ui/react";
 import DashboardWrapper from "../../../components/dashboard/DashboardWrapper";
+import Link from "../../../components/common/Link";
 import { FiUser, FiList, FiHeadphones, FiDatabase } from "react-icons/fi";
 
-function Home() {
+import { connect } from "react-redux";
+// import { setUser } from "../../../ctx/actions";
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
+function Home({ user }) {
+  React.useEffect(() => {
+    document.title = "Dashboard - JulioStays";
+  }, []);
+
   return (
     <DashboardWrapper>
+      <Flex alignItems="baseline" fontSize={"xs"}>
+        <Text
+          fontSize={{ base: "2xl", md: "2xl" }}
+          as="h1"
+          textTransform={"capitalize"}
+        >
+          Welcome {user.firstName}!{" "}
+        </Text>
+        <Text fontSize="xs" ml="2">
+          <Link
+            to="/verification"
+            color="teal"
+            label="( verify account )"
+            fontSize="sm"
+          />
+        </Text>
+      </Flex>
+      <Text fontSize="sm" mb="5" color="gray">
+        Dashboard
+      </Text>
       <SimpleGrid
         h="fit-content"
         templateColumns={{
@@ -15,7 +49,7 @@ function Home() {
         spacing={"10"}
         fontSize="sm"
       >
-        <Box h="30vh" borderWidth="thin" bg="white" w={{ base: "100%" }}>
+        <Box h={{base: '20vh', md: '30vh'}} borderWidth="thin" bg="white" w={{ base: "100%" }} borderColor={'black'}>
           <Flex
             flexDir="column"
             h="inherit"
@@ -28,19 +62,19 @@ function Home() {
               <Box
                 w="10"
                 h="10"
-                bg="black"
+                bg="rgb(38, 38, 39)"
                 display="flex"
                 alignItems="center"
                 justifyContent="center"
-                rounded="10"
+                rounded="full"
               >
                 <FiUser size="20" color="white" />
               </Box>
             </Flex>
-            <Text>Active Subcriptions</Text>
+            <Text fontSize={"sm"}>Active Subcriptions</Text>
           </Flex>
         </Box>
-        <Box h="30vh" borderWidth="thin" bg="white" w={{ base: "100%" }}>
+        <Box h={{base: '20vh', md: '30vh'}} borderWidth="thin" bg="white" w={{ base: "100%" }} borderColor={'black'}>
           <Flex
             flexDir="column"
             h="inherit"
@@ -53,19 +87,19 @@ function Home() {
               <Box
                 w="10"
                 h="10"
-                bg="black"
+                bg="rgb(38, 38, 39)"
                 display="flex"
                 alignItems="center"
                 justifyContent="center"
-                rounded="10"
+                rounded="full"
               >
                 <FiList size="20" color="white" />
               </Box>
             </Flex>
-            <Text>Listing(s)</Text>
+            <Text fontSize="sm">Listing(s)</Text>
           </Flex>
         </Box>
-        <Box h="30vh" borderWidth="thin" bg="white" w={{ base: "100%" }}>
+        <Box h={{base: '20vh', md: '30vh'}} borderWidth="thin" bg="white" w={{ base: "100%" }} borderColor={'black'}>
           <Flex
             flexDir="column"
             h="inherit"
@@ -78,7 +112,7 @@ function Home() {
               <Box
                 w="10"
                 h="10"
-                bg="black"
+                bg="rgb(38, 38, 39)"
                 display="flex"
                 alignItems="center"
                 justifyContent="center"
@@ -87,7 +121,7 @@ function Home() {
                 <FiDatabase size="20" color="white" />
               </Box>
             </Flex>
-            <Text>Earnings this month</Text>
+            <Text fontSize={"sm"}>Earnings this month</Text>
           </Flex>
         </Box>
       </SimpleGrid>
@@ -103,6 +137,7 @@ function Home() {
         <Box
           h="30vh"
           borderWidth="thin"
+          borderColor={'black'}
           bg="white"
           w={{ base: "100%" }}
           mt="10"
@@ -110,35 +145,48 @@ function Home() {
           fontSize="sm"
           flex="2"
         >
-          <Box h="30%" bg="black" p="3">
+          <Box h="30%" bg="rgb(38, 38, 39)" p="3">
             <Flex>
-              <Text color="white" ml="3">
+              <Text
+                color="white"
+                ml="3"
+                textTransform={"uppercase"}
+                letterSpacing={"widest"}
+                fontSize={"smaller"}
+              >
                 Recent Bookings
               </Text>
             </Flex>
           </Box>
           <Box h="70%" p="3">
-          <Text>No Recent Bookings</Text>
+            <Text fontSize={"sm"}>No Recent Bookings</Text>
           </Box>
         </Box>
         <Box
           h="30vh"
           borderWidth="thin"
+          borderColor={'black'}
           bg="white"
           w={{ base: "100%" }}
           mt="10"
           fontSize="sm"
           flex="1"
         >
-          <Box h="30%" bg="black" p="3">
+          <Box h="30%" bg="rgb(38, 38, 39)" p="3">
             <Flex>
               <FiHeadphones size="20" color="white" />
-              <Text color="white" ml="3">
+              <Text
+                color="white"
+                ml="3"
+                textTransform={"uppercase"}
+                letterSpacing={"widest"}
+                fontSize={"smaller"}
+              >
                 Customer Support
               </Text>
             </Flex>
           </Box>
-          <Box h="70%" p="3">
+          <Box h="70%" p="3" fontSize={"sm"}>
             <Text>Fibre Customer Experience</Text>
             <Text>info@fibre.ng</Text>
             <Text>+234 818 000 0954</Text>
@@ -149,4 +197,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default connect(mapStateToProps, null)(Home);

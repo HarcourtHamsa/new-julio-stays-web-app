@@ -18,8 +18,8 @@ const SocialButton = ({ children, label, href }) => {
     <chakra.button
       bg={useColorModeValue("blackAlpha.100", "whiteAlpha.100")}
       rounded={"full"}
-      w={8}
-      h={8}
+      w={10}
+      h={10}
       cursor={"pointer"}
       as={"a"}
       href={href}
@@ -28,7 +28,7 @@ const SocialButton = ({ children, label, href }) => {
       justifyContent={"center"}
       transition={"background 0.3s ease"}
       _hover={{
-        bg: useColorModeValue("blackAlpha.200", "whiteAlpha.200"),
+        bg: useColorModeValue("blackAlpha.900", "whiteAlpha.200"),
       }}
     >
       <VisuallyHidden>{label}</VisuallyHidden>
@@ -39,7 +39,7 @@ const SocialButton = ({ children, label, href }) => {
 
 const ListHeader = ({ children }) => {
   return (
-    <Text fontWeight={"500"} fontSize={"lg"} mb={2}>
+    <Text fontSize={"sm"} mb={2} color="teal">
       {children}
     </Text>
   );
@@ -48,8 +48,8 @@ const ListHeader = ({ children }) => {
 export default function Footer() {
   return (
     <Box
-      bg={useColorModeValue("black", "gray.900")}
-      color={useColorModeValue("gray.50", "gray.200")}
+      bg={useColorModeValue("#161616", "gray.900")}
+      color={useColorModeValue("gray", "gray.200")}
       fontSize="sm"
     >
       <Container as={Stack} maxW={"6xl"} py={10}>
@@ -64,18 +64,18 @@ export default function Footer() {
 
             <Stack direction={"row"} spacing={6}>
               <SocialButton label={"Twitter"} href={"#"}>
-                <FaTwitter />
+                <FaTwitter size="20" />
               </SocialButton>
               <SocialButton label={"YouTube"} href={"#"}>
-                <FaYoutube />
+                <FaYoutube size="20" />
               </SocialButton>
               <SocialButton label={"Instagram"} href={"#"}>
-                <FaInstagram />
+                <FaInstagram size="20" />
               </SocialButton>
             </Stack>
           </Stack>
-          <Stack align={"flex-start"} >
-            <ListHeader>Why JulioStays</ListHeader>
+          <Stack align={"flex-start"}>
+            <ListHeader fontSize="sm">Why Julio Stays</ListHeader>
             <Link href={"#"}>Find your home</Link>
             <Link href={"#"}>List your space</Link>
             <Link href={"#"}>All bills inclusive</Link>

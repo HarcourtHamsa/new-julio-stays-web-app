@@ -1,6 +1,6 @@
 import React, { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { ProtectedRoute } from "./utils";
+import  ProtectedRoute from "./utils";
 import Loader from "./components/common/Loader";
 import "./index.css";
 
@@ -12,8 +12,10 @@ const Login = lazy(() => import("./pages/auth/Login"));
 const Signup = lazy(() => import("./pages/auth/Signup"));
 const Dashboard = lazy(() => import("./pages/app/dashboard/Home"));
 const Profile = lazy(() => import("./pages/app/dashboard/Profile"));
-const Listing = lazy(() => import("./pages/app/dashboard/listing/Index"));
+const Listing = lazy(() => import("./pages/app/dashboard/listing/Listing"));
 const ListingForm = lazy(() => import("./pages/app/dashboard/listing/Listing"));
+const Remittance = lazy(() => import("./pages/app/dashboard/Remittance"));
+const Verification = lazy(() => import("./pages/app/dashboard/verification/Index"));
 
 const App = () => {
   return (
@@ -30,6 +32,8 @@ const App = () => {
           <ProtectedRoute exact path="/app/profile" component={Profile} />
           <ProtectedRoute exact path="/app/listing" component={Listing} />
           <ProtectedRoute exact path="/app/listing/start" component={ListingForm} />
+          <ProtectedRoute exact path="/app/payment" component={Remittance} />
+          <ProtectedRoute exact path="/verification" component={Verification} />
         </Switch>
       </Router>
     </Suspense>

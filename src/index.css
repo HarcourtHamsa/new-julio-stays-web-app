@@ -8,6 +8,26 @@
   src: url("./assets/fonts/Minigame.ttf");
 }
 
+@font-face {
+  font-family: "CircularSpotifyTxT";
+  src: url("./assets/fonts/CircularSpotifyTxT-Black.ttf");
+}
+
+@font-face {
+  font-family: "DM Sans";
+  src: url("./assets/fonts/DMSans-Medium.ttf");
+}
+
+@font-face {
+  font-family: "DM Sans Bold";
+  src: url("./assets/fonts/DMSans-Bold.ttf");
+}
+
+@font-face {
+  font-family: "UberMove";
+  src: url("./assets/fonts/UberMoveMedium.otf");
+}
+
 html,
 body {
   padding: 0;
@@ -15,11 +35,11 @@ body {
 }
 
 * {
-  font-family: "ProductSans";
+  font-family: "DM Sans";
 }
 
 h1,
 h2,
 h3 {
-  font-family: "Minigame";
+  font-family: "DM Sans Bold";
 }

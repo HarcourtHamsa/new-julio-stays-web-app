@@ -7,6 +7,17 @@ const Profile = () => {
   return (
     <div>
       <DashboardWrapper>
+        <Text
+          fontSize={{ base: "2xl", md: "2xl" }}
+          as="h1"
+          textTransform={"capitalize"}
+        >
+          User Profile
+        </Text>
+
+        <Text fontSize="sm" mb="5" color="gray">
+          Customize your profile the way you want!
+        </Text>
         <Box
           h="fit-content"
           borderWidth="thin"
@@ -22,8 +33,8 @@ const Profile = () => {
             <Avatar
               icon={<FiUser color="white" />}
               size="lg"
-              bg="black"
-              rounded="20"
+              bg="rgb(38, 38, 39)"
+              rounded="full"
             />
             <Button
               fontWeight="normal"

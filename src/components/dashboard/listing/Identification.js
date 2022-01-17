@@ -1,17 +1,11 @@
 import React from "react";
-import {
-  Box,
-  FormLabel,
-  Stack,
-  Flex,
-  InputGroup,
-} from "@chakra-ui/react";
+import { Box, FormLabel, Stack, Flex, InputGroup } from "@chakra-ui/react";
 
 // components
-import FormInput from "../../../components/common/FormInput";
-import SubmitButton from "../../../components/common/SubmitButton";
+import FormInput from "../../common/FormInput";
+import SubmitButton from "../../common/SubmitButton";
 
-function PersonalDetails() {
+function Identification() {
   return (
     <Box textAlign="justify">
       <form>
@@ -51,8 +45,8 @@ function PersonalDetails() {
               type="text"
               name="firstName"
               placeholder="First Name"
-                bg="white"
-                shadow="md"
+              bg="white"
+              shadow="md"
               // value={cst.firstName}
               // onChange={handleChange}
             />
@@ -66,8 +60,8 @@ function PersonalDetails() {
               type="text"
               name="firstName"
               placeholder="First Name"
-                bg="white"
-                shadow="md"
+              bg="white"
+              shadow="md"
               // value={cst.firstName}
               // onChange={handleChange}
             />
@@ -79,8 +73,8 @@ function PersonalDetails() {
               type="text"
               name="firstName"
               placeholder="First Name"
-                bg="white"
-                shadow="md"
+              bg="white"
+              shadow="md"
               // value={cst.firstName}
               // onChange={handleChange}
             />
@@ -95,7 +89,7 @@ function PersonalDetails() {
                 type="text"
                 name="firstName"
                 placeholder="First Name"
-                  bg="white"
+                bg="white"
                 shadow="md"
 
                 // value={cst.firstName}
@@ -111,19 +105,17 @@ function PersonalDetails() {
                 type="text"
                 name="firstName"
                 placeholder="First Name"
-                  bg="white"
+                bg="white"
                 shadow="md"
                 // value={cst.firstName}
                 // onChange={handleChange}
               />
             </InputGroup>
           </Flex>
-
-          <SubmitButton label="Continue" shadow="lg" bg="white"/>
         </Stack>
       </form>
     </Box>
   );
 }
 
-export default PersonalDetails;
+export default Identification;

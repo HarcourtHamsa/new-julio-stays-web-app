@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Box,
-  Text,
-  Container,
-  Center,
-  Button,
-  SimpleGrid,
-} from "@chakra-ui/react";
+import { Box, Text, Container, SimpleGrid } from "@chakra-ui/react";
 import Navbar from "../../components/common/Navbar";
 import Footer from "../../components/common/Footer";
 import bannerImg from "../../assets/images/host-banner.jpg";
@@ -16,42 +9,20 @@ function Host() {
     document.title = "Become a Landlord with Julio Stays";
   }, []);
   return (
-    <div>
+    <Box bg="#f1f1f1">
       <Navbar />
       <SimpleGrid
         mb="20"
-        templateColumns={{ sm: "1fr 1fr", md: "1fr 1fr" }}
+        templateColumns={{ sm: "1fr", md: "1fr" }}
         w="inherit"
       >
         <Box
-          h={{ base: "40vh", md: "100vh" }}
-          bg="gray.50"
+          h={{ base: "40vh", md: "80vh" }}
+          bg="rgb(250, 250, 250)"
           bgImage={bannerImg}
           bgPos="center"
           bgSize="cover"
         ></Box>
-        <Box h={{ base: "40vh", md: "100vh" }} bg="black">
-          <Center h="inherit">
-            <Box>
-              <Text color="white" fontSize={{ base: "3xl", md: "5xl" }}>
-                Try hosting on JulioStays
-              </Text>
-              <Text color="white" fontSize="sm">
-                Join us. We’ll help you every step of the way.
-              </Text>
-              <Button
-                fontWeight="normal"
-                mt="5"
-                rounded="0"
-                fontSize="sm"
-                color="white"
-                variant="outline"
-              >
-                Let's go!
-              </Button>
-            </Box>
-          </Center>
-        </Box>
       </SimpleGrid>
       <Container maxW="6xl">
         <Text
@@ -59,9 +30,9 @@ function Host() {
           textTransform="uppercase"
           fontSize="smaller"
         >
-          Why JulioStays
+          Why Julio Stays
         </Text>
-        <Text fontSize={{ base: "xl", md: "3xl" }}>
+        <Text fontSize={{ base: "xl", md: "2xl" }}>
           Let your space work for you.{" "}
         </Text>
         <SimpleGrid
@@ -69,7 +40,12 @@ function Host() {
           templateColumns={{ sm: "1fr 1fr", md: " 1fr 1fr 1fr" }}
           spacing={8}
         >
-          <Box h={{ base: "50vh" }} borderWidth="thin">
+          <Box
+            h={{ base: "50vh" }}
+            borderWidth="thin"
+            bg="white"
+            borderColor={"black"}
+          >
             <Box h="40%"></Box>
             <Box h="60%" p="3">
               <Text fontSize="xl" my="5">
@@ -82,7 +58,12 @@ function Host() {
               </Text>
             </Box>
           </Box>
-          <Box h={{ base: "50vh" }} borderWidth="thin">
+          <Box
+            h={{ base: "50vh" }}
+            borderWidth="thin"
+            bg="white"
+            borderColor={"black"}
+          >
             <Box h="40%"></Box>
             <Box h="60%" p="3">
               <Text fontSize="xl" my="5">
@@ -94,7 +75,12 @@ function Host() {
               </Text>
             </Box>
           </Box>
-          <Box h={{ base: "50vh" }} borderWidth="thin">
+          <Box
+            h={{ base: "50vh" }}
+            borderWidth="thin"
+            bg="white"
+            borderColor={"black"}
+          >
             <Box h="40%"></Box>
             <Box h="60%" p="3">
               <Text fontSize="xl" my="5">
@@ -125,7 +111,7 @@ function Host() {
         </Text>
       </Container>
       <Footer />
-    </div>
+    </Box>
   );
 }
 

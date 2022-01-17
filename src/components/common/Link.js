@@ -22,7 +22,7 @@ function CustomLink({ to, label, color }) {
 const styles = {
   link: (color) => ({
     padding: "2px",
-    color: color ?? "black",
+    color: color ?? "white",
     fontSize: "0.875rem",
     textDecoration: "none",
   }),

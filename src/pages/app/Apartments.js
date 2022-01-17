@@ -19,7 +19,7 @@ function Apartments() {
   return (
     <div>
       <Navbar />
-      <Flex minH={"100vh"}>
+      <Flex minH={"100vh"} bg="#f1f1f1">
         <Container maxW={"6xl"} h="inherit">
           <Box mt="20" h="10vh">
             <Center h="inherit" w={{ base: "100%", md: "3xl" }} m="auto">
@@ -34,8 +34,8 @@ function Apartments() {
                     bg="white"
                     rounded="full"
                     borderWidth="thin"
+                    borderColor="black"
                     size="lg"
-                    
                     pl="10"
                   />
                   <InputLeftElement mt="1">
@@ -50,6 +50,9 @@ function Apartments() {
             templateColumns={{ sm: "1fr 1fr", md: " 1fr 1fr 1fr" }}
             spacing={8}
           >
+            <ApartmentCard />
+            <ApartmentCard />
+            <ApartmentCard />
             <ApartmentCard />
             <ApartmentCard />
             <ApartmentCard />

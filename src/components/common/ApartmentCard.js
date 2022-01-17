@@ -6,22 +6,28 @@ import houseImg from "../../assets/images/prop3.png";
 
 function ApartmentCard() {
   return (
-    <Box h="300" bg="gray.50" w="100%" position="relative">
+    <Box
+      h="350"
+      w="100%"
+      position="relative"
+      borderWidth={"thin"}
+      borderColor={"black"}
+    >
       <Box
         w="50px"
         h="50px"
         rounded="full"
-        bg="white"
+        bg="teal"
         position="absolute"
         top="2"
         right="2"
       >
         <Center h="inherit">
-          <FiHeart size="20" />
+          <FiHeart size="20" color="white" />
         </Center>
       </Box>
-      <Box h="70%" bgImage={houseImg} bgPos="center" bgSize="cover"></Box>
-      <Box bg="white" flex={1} h="30%" fontSize="sm" py={3}>
+      <Box h="60%" bgImage={houseImg} bgPos="center" bgSize="cover"></Box>
+      <Box bg="white" flex={1} h="40%" fontSize="sm" borderWidth="thin" p={3}>
         <Stack>
           <CustomLink to="apartments/home" label="1 bedroom A1 - Nile" />
           <Text fontSize="smaller">Lagos</Text>

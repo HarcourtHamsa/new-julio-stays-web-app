@@ -8,11 +8,13 @@ function FormWrapper({ children }) {
     <>
       <Navbar />
       <Flex
-        minH={{base: "70vh", md: '100vh'}}
+        minH="100vh"
         align="center"
         justify={"center"}
         position="relative"
         overflow="hidden"
+        bg="#f1f1f1"
+        // rgb(250, 250, 250)
       >
         <Stack
           spacing={8}

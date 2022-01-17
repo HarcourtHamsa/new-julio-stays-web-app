@@ -23,7 +23,6 @@ function FormInput({
         variant={variant ?? "filled"}
         size="md"
         fontSize="sm"
-        borderRadius="sm"
         required
         {...rest}
       />
