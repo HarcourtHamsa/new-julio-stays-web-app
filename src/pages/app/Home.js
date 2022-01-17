@@ -3,7 +3,15 @@ import React from "react";
 import Navbar from "../../components/common/Navbar";
 import Footer from "../../components/common/Footer";
 
-import { Box, Text, Center, Button, SimpleGrid, Image } from "@chakra-ui/react";
+import {
+  Box,
+  Text,
+  Center,
+  Button,
+  SimpleGrid,
+  Image,
+  Container,
+} from "@chakra-ui/react";
 
 import buildingImg from "../../assets/images/building.png";
 
@@ -53,7 +61,7 @@ function Landing() {
               my="10"
               // textAlign={"center"}
               textTransform="capitalize"
-              fontSize={{ base: "2xl", md: "4xl" }}
+              fontSize={{ base: "2xl", md: "5xl" }}
               as="h1"
             >
               Reasons Why People Love Julio Stays
@@ -137,7 +145,7 @@ function Landing() {
               w={{ base: "90vw", md: "2xl" }}
               textAlign={"center"}
               textTransform="capitalize"
-              fontSize={{ base: "2xl", md: "4xl" }}
+              fontSize={{ base: "3xl", md: "5xl" }}
               color="black"
               as="h2"
             >
@@ -157,6 +165,26 @@ function Landing() {
             </Center>
           </Box>
         </Center>
+      </Box>
+      <Box borderTopWidth={"thin"} minH={"30vh"} borderColor={"black"}>
+        <Container maxW={"6xl"} mt={5}>
+          <Text
+            letterSpacing="widest"
+            textTransform="uppercase"
+            fontSize="smaller"
+            color={'gray'}
+          >
+            Get In Touch
+          </Text>
+          <Text
+            fontSize={{ base: "3xl", md: "5xl" }}
+            textDecoration="underline"
+            _hover={{ cursor: "pointer" }}
+            as="h1"
+          >
+            Support@juliostays.com
+          </Text>
+        </Container>
       </Box>
       <Footer />
     </Box>
